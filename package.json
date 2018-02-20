@@ -1,0 +1,63 @@
+
+{
+    "name":"booster-health-check-nodejs",
+    "version":"1.0.0",
+    "author":"Red Hat, Inc.",
+    "license":"Apache-2.0",
+    "scripts":{
+        "test":"tape test/*.js | tap-spec",
+        "lint":"eslint test/*.js app.js bin/*",
+        "prepare":"nsp check",
+        "coverage":"nyc npm test",
+        "coveralls":"nyc npm test && nyc report --reporter=text-lcov | coveralls",
+        "ci":"npm run lint && npm run coveralls",
+        "dependencyCheck":"szero . --ci",
+        "release":"standard-version",
+        "openshift":"nodeshift --strictSSL=false --nodeVersion=8.x",
+        "postinstall":"license-reporter report && license-reporter save --xml licenses.xml",
+        "start":"PORT=8080 node ./bin/www"
+    },
+    "files":[
+        "package.json",
+        "app.js",
+        "public",
+        "bin",
+        "LICENSE",
+        "licenses"
+    ],
+    "repository":{
+        "type":"git",
+        "url":"git://github.com/bucharest-gold/nodejs-health-check.git"
+    },
+    "bugs":{
+        "url":"https://github.com/bucharest-gold/nodejs-health-check/issues"
+    },
+    "homepage":"https://github.com/bucharest-gold/nodejs-health-check",
+    "devDependencies":{
+        "coveralls":"^3.0.0",
+        "eslint":"~4.17.0",
+        "eslint-config-semistandard":"~12.0.0",
+        "eslint-config-standard":"~11.0.0-beta.0",
+        "eslint-plugin-import":"^2.7.0",
+        "eslint-plugin-node":"^6.0.0",
+        "eslint-plugin-promise":"~3.6.0",
+        "eslint-plugin-react":"~7.6.0",
+        "eslint-plugin-standard":"~3.0.1",
+        "license-reporter":"^1.1.3",
+        "nodeshift":"^1.3.0",
+        "nsp":"~3.1.0",
+        "nyc":"~11.4.1",
+        "proxyquire":"^1.8.0",
+        "standard-version":"^4.2.0",
+        "supertest":"^3.0.0",
+        "szero":"^1.0.0",
+        "tap-spec":"~4.1.1",
+        "tape":"~4.8.0"
+    },
+    "dependencies":{
+        "body-parser":"^1.18.2",
+        "debug":"^3.1.0",
+        "express":"^4.16.0",
+        "kube-probe":"^0.2.0"
+    }
+}
